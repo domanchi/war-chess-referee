@@ -4,9 +4,9 @@ import torch
 from PIL import Image
 from torchvision import transforms
 
+from ..util import get_path_to
 from .alphabet import alphabetChinese
 from .crnn import CRnn
-from ..util import get_path_to
 
 
 class CRNNPredictor:
@@ -22,7 +22,7 @@ class CRNNPredictor:
             ).items()
         })
         self.net.eval()
-    
+
     def predict(self, image: Image):
         # Convert to grayscale
         image = image.convert('L')
@@ -30,7 +30,7 @@ class CRNNPredictor:
         # Then, normalize it to a height of 32.
         scale = image.size[1] * 1.0 / 32
         scaled_width = int(image.size[0] / scale)
-        image = image.resize((scaled_width, 32,), Image.BILINEAR)
+        image = image.resize((scaled_width, 32), Image.BILINEAR)
 
         # Transform it to Tensor, to be used in tensorflow.
         image = transforms.ToTensor()(image).sub(0.5).div(0.5).to(self.device)

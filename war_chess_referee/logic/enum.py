@@ -13,6 +13,8 @@ class ResultType(Enum):
 
 
 PieceType = TypeVar('Piece')
+
+
 class Piece(Enum):
     FIELD_MARSHALL = 9
     GENERAL = 8
@@ -40,7 +42,7 @@ class Piece(Enum):
                     return cls.FLAG
         except IndexError:
             raise KeyError
-        
+
         mapping = {
             '司': cls.FIELD_MARSHALL,
             '师': cls.LIEUTENANT_GENERAL,

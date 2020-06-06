@@ -29,23 +29,24 @@ class Drawing:
             cv2.putText(
                 frame,
                 f'Status: {self.status}',
-                (20, 50,),
+                (20, 50),
                 fontFace=cv2.FONT_HERSHEY_SIMPLEX,
                 fontScale=1,
                 color=Color.WHITE.value,
                 thickness=2,
                 bottomLeftOrigin=False,
             )
-        
+
         if self.focal_frame_color == Color.GREEN:
             cv2.putText(
                 frame,
                 'Captured!',
                 (
                     int(
-                        (self.focal_frame.end_point.x - self.focal_frame.start_point.x) / 2 \
-                            + self.focal_frame.start_point.x \
-                            - 80
+                        (self.focal_frame.end_point.x -
+                         self.focal_frame.start_point.x) / 2
+                        + self.focal_frame.start_point.x
+                        - 80,
                     ),
                     self.focal_frame.end_point.y - 20,
                 ),
@@ -59,7 +60,7 @@ class Drawing:
     def process_result(self, result: ResultType):
         def revert_focal_frame_color():
             self.focal_frame_color = Color.GRAY
-        
+
         delay(revert_focal_frame_color, 1)
 
         if result == ResultType.ERROR:
@@ -75,17 +76,17 @@ class Drawing:
             ResultType.DEFENDER_LOSE: 'Attacker wins!',
             ResultType.PENDING: 'Waiting for Defender',
         }.get(result)
-        
+
         def revert_status():
             self.status = 'Waiting for Attacker'
-        
+
         if result != ResultType.PENDING:
             delay(revert_status, 3)
 
 
 class Color(Enum):
     # Remember that OpenCV defaults to BGR (instead of RGB).
-    RED = (0, 0, 255,)
-    GREEN = (0, 255, 0,)
-    GRAY = (120, 120, 120,)
-    WHITE = (255, 255, 255,)
+    RED = (0, 0, 255)
+    GREEN = (0, 255, 0)
+    GRAY = (120, 120, 120)
+    WHITE = (255, 255, 255)

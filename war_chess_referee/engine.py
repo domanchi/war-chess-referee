@@ -23,7 +23,7 @@ class GameEngine:
         """
         self.predictor = CRNNPredictor()
         self.game = GameState()
-        
+
         self.width = width
         self.height = height
 
@@ -42,7 +42,7 @@ class GameEngine:
 
                 window.show(frame)
                 frame = vs.read()
-    
+
     def _process_frame(self, frame: np.ndarray):
         if not self.focal_area:
             height, width = frame.shape[:2]
@@ -58,7 +58,7 @@ class GameEngine:
         self.renderer.render(frame)
 
         self._process_key_input(cv2.waitKey(20), frame)
-    
+
     def _process_key_input(self, key: Optional[int], frame: np.ndarray):
         if key == 27:
             raise StopIteration

@@ -8,27 +8,31 @@ from typing import TypeVar
 RectangleType = TypeVar('Rectangle')
 
 
-class Point(namedtuple(
-    'Point',
-    (
-        'x',
-        'y',
-    )
-)):
+class Point(
+    namedtuple(
+        'Point',
+        (
+            'x',
+            'y',
+        ),
+    ),
+):
     def __new__(cls, x: float, y: float):
         # Everything is integers, because we don't need to be that precise.
         return super().__new__(cls, int(x), int(y))
 
 
-class Rectangle(namedtuple(
-    'Rectangle',
-    (
-        'width',
-        'height',
-        'x',
-        'y',
-    )
-)):
+class Rectangle(
+    namedtuple(
+        'Rectangle',
+        (
+            'width',
+            'height',
+            'x',
+            'y',
+        ),
+    ),
+):
     def __new__(
         cls,
         width: float,
@@ -58,7 +62,7 @@ class Rectangle(namedtuple(
 
     @property
     def dimensions(self) -> Tuple[float, float]:
-        return (self.width, self.height,)
+        return (self.width, self.height)
 
     def __mul__(self, other: RectangleType) -> RectangleType:
         # Used for ratio calculation.

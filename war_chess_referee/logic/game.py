@@ -1,5 +1,5 @@
-from .enum import ResultType
 from .enum import Piece
+from .enum import ResultType
 
 
 class GameState:
@@ -23,7 +23,7 @@ class GameState:
         else:
             self.previous_piece = rank
             return ResultType.PENDING
-    
+
 
 def compare_pieces(pieceA: Piece, pieceB: Piece) -> ResultType:
     # First, check for victory.
@@ -35,11 +35,11 @@ def compare_pieces(pieceA: Piece, pieceB: Piece) -> ResultType:
     # Same ranks kill each other.
     if pieceA == pieceB:
         return ResultType.BOTH_LOSE
-    
+
     # Bombs blow everything up.
     if pieceA == Piece.BOMB or pieceB == Piece.BOMB:
         return ResultType.BOTH_LOSE
-    
+
     # Only engineers know how to clear mines.
     # Otherwise, mines destroy anyone who touch it.
     # Also, mines don't move, so can only be defense.
